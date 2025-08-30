@@ -1,0 +1,83 @@
+# Python build, test, coverage, and virtual environments
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.pdb
+*.egg
+*.eggs
+*.manifest
+*.spec
+*.pem
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Python virtual environments
+venv/
+venv39/
+venv312/
+.venv/
+ENV/
+.env/
+
+# Environment variable/config files
+.env
+.env.*
+*.env
+
+# Output and logs
+output/
+*.log
+*.csv
+*.sqlite3
+*.db
+
+# Jupyter Notebook files
+.ipynb_checkpoints
+
+# Test and coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.cache
+.pytest_cache/
+coverage.xml
+
+# IDE and editor folders, settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Additional Homebrew installs
+*.local/
+
+# CrewAI autosaves (if any)
+autosave/
+
+# Miscellaneous
+*.bak
+*.tmp
+*.swp
+*~
+
+# Node.js artifacts (if present)
+node_modules/
+
+# Selenium downloads/output
+*.log
+chromedriver.log
+chromedriver.exe
+
+# Ignore formula/cask API files
+formula.jws.json
+cask.jws.json
+ß

@@ -17,17 +17,20 @@ from selenium.webdriver.chrome.service import Service
 import time
 import random
 from config import Config, logger
+from typing import Type
+
 
 class WebScrapingToolInput(BaseModel):
     url: str = Field(..., description="URL to scrape")
     site_name: str = Field(..., description="Name of the website")
     max_products: int = Field(default=50, description="Max products to scrape")
 
+
 class PolygonMarketScraperTool(BaseTool):
     name: str = "PolygonMarketScraper"
     description: str = ("Scrapes prediction market data from Polymarket.com. Returns structured JSON.")
 
-    args_schema = WebScrapingToolInput
+    args_schema: Type[WebScrapingToolInput] = WebScrapingToolInput
 
     def _run(self, url, site_name, max_products=50):
         try:
@@ -71,6 +74,7 @@ class PolygonMarketScraperTool(BaseTool):
                 "products": [],
                 "products_count": 0
             })
+
     def _scrape_polymarket(self, driver, max_products):
         products = []
         try:
@@ -137,7 +141,7 @@ class PolygonMarketScraperTool(BaseTool):
                         "confidence_score": 0.7 if title else 0.4
                     }
                     products.append(product)
-                except Exception as e:
+                except Exception:
                     continue
         except Exception as e:
             logger.error(f"Error scraping Kalshi: {str(e)}")
@@ -168,11 +172,12 @@ class PolygonMarketScraperTool(BaseTool):
             logger.error(f"Error in generic scraping: {str(e)}")
         return products
 
+
 class MarketDataFallbackTool(BaseTool):
     name: str = "MarketDataFallback"
     description: str = "Fallback web scraping tool using requests and BeautifulSoup."
 
-    args_schema = WebScrapingToolInput
+    args_schema: Type[WebScrapingToolInput] = WebScrapingToolInput
 
     def _run(self, url, site_name, max_products=50):
         try:
@@ -216,5 +221,6 @@ class MarketDataFallbackTool(BaseTool):
                 "products_count": 0,
                 "method": "fallback_requests"
             })
+
 
 SCRAPING_TOOLS = [PolygonMarketScraperTool(), MarketDataFallbackTool()]
